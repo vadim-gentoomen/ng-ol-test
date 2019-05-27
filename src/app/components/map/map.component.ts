@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {Map, View} from 'ol';
-import {fromLonLat} from 'ol/proj';
 import {Tile} from 'ol/layer';
-import {Attribution, defaults, MousePosition, ScaleLine, ZoomSlider} from 'ol/control';
 import {OSM, XYZ} from 'ol/source';
+import {fromLonLat} from 'ol/proj';
+import {Attribution, defaults, MousePosition, ScaleLine, ZoomSlider} from 'ol/control';
 import {Coordinate, format} from 'ol/coordinate';
 
 @Component({
@@ -14,8 +14,7 @@ import {Coordinate, format} from 'ol/coordinate';
 export class MapComponent implements OnInit {
   map: Map;
 
-  constructor() {
-  }
+  constructor() { }
 
   ngOnInit() {
     const osm = new Tile({

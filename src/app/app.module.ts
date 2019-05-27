@@ -1,13 +1,15 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { MapComponent } from './map/map.component';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
+import { OverlaysComponent } from './components/overlays/overlays.component';
+import { MapComponent } from './components/map/map.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    OverlaysComponent,
     MapComponent
   ],
   imports: [
@@ -17,4 +19,7 @@ import { MapComponent } from './map/map.component';
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor() {
+  }
+}
