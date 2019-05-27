@@ -1,5 +1,4 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {CreateMapService} from '../../services/create-map.service';
 
 @Component({
   selector: 'app-overlays',
