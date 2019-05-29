@@ -10,7 +10,8 @@ import OverlayPositioning from 'ol/OverlayPositioning';
   styleUrls: ['./overlays.component.scss']
 })
 export class OverlaysComponent implements OnInit {
-  @ViewChild('home') home: ElementRef;
+  @ViewChild('build') build: ElementRef;
+  @ViewChild('work') work: ElementRef;
 
   constructor(private ols: OlService) {
 
@@ -18,12 +19,19 @@ export class OverlaysComponent implements OnInit {
 
   ngOnInit(): void {
 
-    const label = new Overlay({
+    const build = new Overlay({
       position: fromLonLat([34.092304, 44.981786]),
-      element: this.home.nativeElement,
+      element: this.build.nativeElement,
       positioning: OverlayPositioning.CENTER_CENTER
     });
-    this.ols.map.addOverlay(label);
+    this.ols.map.addOverlay(build);
+
+    const work = new Overlay({
+      position: fromLonLat([34.099185, 44.937494]),
+      element: this.work.nativeElement,
+      positioning: OverlayPositioning.CENTER_CENTER
+    });
+    this.ols.map.addOverlay(work);
   }
 
 }
