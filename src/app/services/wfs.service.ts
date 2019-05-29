@@ -25,7 +25,7 @@ export class WfsService {
 
   getFeatureTypes$() {
     const obs = new Observable((observer: Observer<any>) => {
-      this.http.get(`${environment.wfs}?service=WFS&version=2.0.0&request=DescribeFeatureType&outputFormat=application/json`, {
+      this.http.get(`${environment.wfsUrl}?service=WFS&version=2.0.0&request=DescribeFeatureType&outputFormat=application/json`, {
         responseType: 'json'
       })
         .pipe(
@@ -68,7 +68,7 @@ export class WfsService {
 
       const body = new XMLSerializer().serializeToString(featureRequest);
 
-      this.http.post(environment.wfs, body, {
+      this.http.post(environment.wfsUrl, body, {
         responseType: 'json'
       })
         .pipe(
