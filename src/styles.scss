@@ -6,4 +6,12 @@
   border-radius: 4px;
   color: #eee;
   padding: 1px 5px;
+  top: unset !important;
+  left: 45%;
+  right: unset !important;
+  bottom: 8px;
+
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

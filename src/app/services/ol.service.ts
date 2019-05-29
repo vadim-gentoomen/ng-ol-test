@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
+import {Map, View} from 'ol';
 import {Tile} from 'ol/layer';
 import {OSM, XYZ} from 'ol/source';
-import {Map, View} from 'ol';
 import {fromLonLat} from 'ol/proj';
-import {Attribution, defaults, MousePosition, ScaleLine, ZoomSlider} from 'ol/control';
+import {Attribution, defaults, FullScreen, MousePosition, ScaleLine, ZoomSlider} from 'ol/control';
 import {Coordinate, format} from 'ol/coordinate';
 
 @Injectable({
@@ -42,6 +42,7 @@ export class OlService {
           }),
           new Attribution(),
           new ZoomSlider(),
+          new FullScreen(),
         ]),
     });
   }
