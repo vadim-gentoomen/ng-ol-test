@@ -5,6 +5,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import { OverlaysComponent } from './components/overlays/overlays.component';
 import { MapComponent } from './components/map/map.component';
+import {OlService} from './services/ol.service';
 
 @NgModule({
   declarations: [
@@ -16,10 +17,10 @@ import { MapComponent } from './components/map/map.component';
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [OlService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
-  constructor() {
+  constructor(private ol: OlService) {
   }
 }
