@@ -1,30 +1,35 @@
-import {Component, EventEmitter, HostBinding, HostListener, Input, OnInit, Output} from '@angular/core';
+import {Component, HostBinding, Input, OnInit} from '@angular/core';
+import {SidebarButton} from '../model/model';
 
 @Component({
   selector: 'app-sidebar-button',
   templateUrl: './sidebar-button.component.html',
   styleUrls: ['./sidebar-button.component.scss']
 })
-export class SidebarButtonComponent implements OnInit {
-  @HostBinding('class.disabled-content') isDisabled = false;
+export class SidebarButtonComponent implements OnInit, SidebarButton {
 
-  @Input('name') name = 'radio_button_unchecked';
+  @Input('id')
+  id: number;
 
-  @Input('disabled-content') set disabledContent(state: boolean) {
-    if (state != null) {
-      this.isDisabled = state;
-    }
-  }
-  @Output('buttonClick') buttonClick = new EventEmitter<string>();
+  @Input('iconId')
+  iconId: string;
 
-  @HostListener('click') onClick(event: Event) {
-    this.buttonClick.emit(this.name);
-  }
+  @Input('active')
+  @HostBinding('class.active')
+  active: boolean;
+
+  @Input('disabled')
+  @HostBinding('class.disabled')
+  disabled: boolean;
+
+  @Input('description')
+  description: string;
 
   constructor() {
   }
 
   ngOnInit() {
   }
+
 
 }

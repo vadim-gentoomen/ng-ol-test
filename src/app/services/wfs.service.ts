@@ -23,7 +23,7 @@ export class WfsService {
     //   });
   }
 
-  getFeatureTypes$() {
+  getFeatureTypes$(): Observable<string[]> {
     const obs = new Observable((observer: Observer<any>) => {
       const params = {
         service: 'WFS',

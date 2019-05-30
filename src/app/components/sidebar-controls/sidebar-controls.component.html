@@ -1,1 +1,7 @@
-<ng-content></ng-content>
+<app-sidebar-button *ngFor="let button of (buttons$ | async)"
+                    [id]="button.id"
+                    [iconId]="button.iconId"
+                    [active]="button.active"
+                    [disabled]="button.disabled"
+                    [description]="button.description"
+                    (click)="onClick(button)"></app-sidebar-button>

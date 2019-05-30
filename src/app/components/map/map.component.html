@@ -1,13 +1,4 @@
 <div #map class="map"></div>
 <app-overlays></app-overlays>
-<app-sidebar-controls class="ol-control">
-
-  <app-sidebar-button name="layers" (buttonClick)="click($event)"></app-sidebar-button>
-
-  <app-sidebar-button name="map" disabled-content="true" (buttonClick)="click($event)"></app-sidebar-button>
-
-  <app-sidebar-button name="add_location" disabled-content="true" (buttonClick)="click($event)"></app-sidebar-button>
-
-  <app-sidebar-button name="edit_location" disabled-content="true" (buttonClick)="click($event)"></app-sidebar-button>
-
-</app-sidebar-controls>
+<app-sidebar-controls class="ol-control"></app-sidebar-controls>
+<app-sidebar-portal></app-sidebar-portal>

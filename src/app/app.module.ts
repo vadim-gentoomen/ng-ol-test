@@ -10,8 +10,12 @@ import {WfsService} from './services/wfs.service';
 import {HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MaterialModule} from './app-angular-material.module';
-import { SidebarControlsComponent } from './components/sidebar-controls/sidebar-controls.component';
-import { SidebarButtonComponent } from './components/sidebar-button/sidebar-button.component';
+import {SidebarControlsComponent} from './components/sidebar-controls/sidebar-controls.component';
+import {SidebarButtonComponent} from './components/sidebar-button/sidebar-button.component';
+import {SidebarPortalComponent} from './components/sidebar-portal/sidebar-portal.component';
+import {PortalModule} from '@angular/cdk/portal';
+import {PortalLayersComponent} from './components/portal-layers/portal-layers.component';
+import {PortalDefaultComponent} from './components/portal-default/portal-default.component';
 
 @NgModule({
   declarations: [
@@ -19,18 +23,27 @@ import { SidebarButtonComponent } from './components/sidebar-button/sidebar-butt
     OverlaysComponent,
     MapComponent,
     SidebarControlsComponent,
-    SidebarButtonComponent
+    SidebarButtonComponent,
+    SidebarPortalComponent,
+    PortalLayersComponent,
+    PortalDefaultComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    PortalModule,
     MaterialModule
   ],
   providers: [
     OlService,
     WfsService
+  ],
+  entryComponents: [
+    SidebarPortalComponent,
+    PortalLayersComponent,
+    PortalDefaultComponent
   ],
   bootstrap: [AppComponent]
 })

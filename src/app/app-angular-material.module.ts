@@ -29,7 +29,7 @@ export const MATERIAL_MODULES = [
   // MatListModule,
   // MatCardModule,
   // MatDividerModule,
-  // MatTooltipModule,
+  MatTooltipModule,
   // MatSlideToggleModule,
   MatProgressSpinnerModule,
   // MatProgressBarModule,

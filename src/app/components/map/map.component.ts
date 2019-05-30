@@ -16,8 +16,4 @@ export class MapComponent implements OnInit {
     this.ols.initMap(this.mapElement.nativeElement);
   }
 
-  click(name: string) {
-    console.log(name);
-  }
-
 }
