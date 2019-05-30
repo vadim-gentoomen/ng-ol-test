@@ -10,12 +10,16 @@ import {WfsService} from './services/wfs.service';
 import {HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MaterialModule} from './app-angular-material.module';
+import { SidebarControlsComponent } from './components/sidebar-controls/sidebar-controls.component';
+import { SidebarButtonComponent } from './components/sidebar-button/sidebar-button.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     OverlaysComponent,
-    MapComponent
+    MapComponent,
+    SidebarControlsComponent,
+    SidebarButtonComponent
   ],
   imports: [
     BrowserModule,

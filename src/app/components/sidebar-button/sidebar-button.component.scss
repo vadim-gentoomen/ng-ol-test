@@ -1,0 +1,21 @@
+:host {
+  user-select: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  width: 40px;
+  color: white;
+  line-height: 40px;
+  cursor: pointer;
+  background-color: rgba(0, 60, 136, 0.5);
+  margin: 0 0 1px 0;
+}
+
+:host(.disabled-content) {
+  pointer-events: none;
+  cursor: default;
+  opacity: 0.2;
+}
+
+

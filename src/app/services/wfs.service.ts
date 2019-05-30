@@ -12,11 +12,11 @@ import {WriteGetFeatureOptions} from 'ol/format/WFS';
 export class WfsService {
 
   constructor(private http: HttpClient) {
-    this.getFeatureTypes$()
-      .subscribe(data => {
-        console.log(data);
-      });
-
+    // this.getFeatureTypes$()
+    //   .subscribe(data => {
+    //     console.log(data);
+    //   });
+    //
     // this.featureRequest$()
     //   .subscribe(data => {
     //     console.log(data);
@@ -25,8 +25,15 @@ export class WfsService {
 
   getFeatureTypes$() {
     const obs = new Observable((observer: Observer<any>) => {
-      this.http.get(`${environment.wfsUrl}?service=WFS&version=2.0.0&request=DescribeFeatureType&outputFormat=application/json`, {
-        responseType: 'json'
+      const params = {
+        service: 'WFS',
+        version: '2.0.0',
+        request: 'DescribeFeatureType',
+        outputFormat: 'application/json',
+      };
+      this.http.get(environment.wfsUrl, {
+        params,
+        responseType: 'json',
       })
         .pipe(
           first(),
@@ -36,7 +43,7 @@ export class WfsService {
               const {typeName = ''} = item;
               return typeName;
             });
-          })
+          }),
         )
         .subscribe({
           next: (value) => {

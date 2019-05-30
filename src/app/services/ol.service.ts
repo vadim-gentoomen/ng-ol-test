@@ -3,7 +3,7 @@ import {Map, View} from 'ol';
 import {Tile} from 'ol/layer';
 import {OSM, XYZ} from 'ol/source';
 import {fromLonLat} from 'ol/proj';
-import {Attribution, defaults, FullScreen, MousePosition, ScaleLine, ZoomSlider} from 'ol/control';
+import {Attribution, defaults, MousePosition, ScaleLine} from 'ol/control';
 import {Coordinate, format} from 'ol/coordinate';
 
 @Injectable({
@@ -31,7 +31,7 @@ export class OlService {
       layers: [osm],
       view: new View({
         center: fromLonLat([34.0, 45.0]),
-        zoom: 8.3
+        zoom: 8.5
       }),
       controls: defaults()
         .extend([
@@ -41,8 +41,6 @@ export class OlService {
             coordinateFormat: (coordinate: Coordinate): string => format(coordinate, '{y}, {x}', 6)
           }),
           new Attribution(),
-          new ZoomSlider(),
-          new FullScreen(),
         ]),
     });
   }
