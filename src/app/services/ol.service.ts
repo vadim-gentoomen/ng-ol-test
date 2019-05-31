@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Map, View} from 'ol';
 import {Tile} from 'ol/layer';
-import {OSM, XYZ} from 'ol/source';
+import {OSM, Stamen, XYZ} from 'ol/source';
 import {fromLonLat} from 'ol/proj';
 import {Attribution, defaults, MousePosition, ScaleLine} from 'ol/control';
 import {Coordinate, format} from 'ol/coordinate';
@@ -12,6 +12,7 @@ import VectorLayer from 'ol/layer/Vector';
 import {Stroke, Style} from 'ol/style';
 import Feature from 'ol/Feature';
 import LayerType from 'ol/LayerType';
+import {createXYZ} from 'ol/tilegrid';
 
 @Injectable({
   providedIn: 'root'
@@ -37,6 +38,44 @@ export class OlService {
     });
     cycleMap.setProperties({name: 'OpenCycleMap'});
 
+    const watercolor = new Tile({
+      source: new Stamen({
+        layer: 'watercolor'
+      }),
+      visible: false,
+    });
+    watercolor.setProperties({name: 'StamenWatercolor'});
+
+    const terrain = new Tile({
+      source: new Stamen({
+        layer: 'terrain'
+      }),
+      visible: false,
+    });
+    terrain.setProperties({name: 'StamenTerrain'});
+
+    const toner = new Tile({
+      source: new Stamen({
+        layer: 'toner'
+      }),
+      visible: false,
+    });
+    toner.setProperties({name: 'StamenToner'});
+
+    /**
+     * YandexMap со сдвигом, не работает.
+     */
+    // const yandex = new Tile({
+    //   source: new XYZ({
+    //     url: 'http://vec0{1-4}.maps.yandex.net/tiles?l=map&x={x}&y={y}&z={z}',
+    //     projection: 'EPSG:3395',
+    //     tileGrid: createXYZ({
+    //       extent: [-20037508.342789244, -20037508.342789244, 20037508.342789244, 20037508.342789244]
+    //     })
+    //   })
+    // });
+    // yandex.setProperties({name: 'YandexMap'});
+
     const vectorSource = new VectorSource();
     const vector = new VectorLayer({
       source: vectorSource,
@@ -51,7 +90,7 @@ export class OlService {
 
     this.map = new Map({
       target: element,
-      layers: [osm, cycleMap, vector],
+      layers: [osm, cycleMap, vector, watercolor, terrain, toner],
       view: new View({
         // center: fromLonLat([84.958757, 56.513178]), // Томск
         center: fromLonLat([34.0, 45.0]), // Крым
