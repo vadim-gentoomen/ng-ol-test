@@ -1,11 +1,11 @@
-import {Component, OnDestroy, OnInit, ViewContainerRef} from '@angular/core';
+import {Component, ComponentFactoryResolver, Injector, OnDestroy, OnInit, ViewContainerRef} from '@angular/core';
 import {ComponentPortal, Portal} from '@angular/cdk/portal';
 import {SidebarStateService} from '../../services/sidebar-state.service';
-import {SidebarButton} from '../model/model';
+import {SidebarButtonConfig} from '../../model/sidebarButtons';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
-import {PortalLayersComponent} from '../portal-layers/portal-layers.component';
-import {PortalDefaultComponent} from '../portal-default/portal-default.component';
+import {createInjector} from '../../model/portalData';
+
 
 @Component({
   selector: 'app-sidebar-portal',
@@ -18,26 +18,28 @@ export class SidebarPortalComponent implements OnInit, OnDestroy {
   private unsubscribe$ = new Subject<void>();
 
   constructor(private viewContainerRef: ViewContainerRef,
-              private sidebarStateService: SidebarStateService) {
+              private sidebarStateService: SidebarStateService,
+              private injector: Injector,
+              private componentFactoryResolver: ComponentFactoryResolver) {
   }
 
   ngOnInit(): void {
-    this.sidebarStateService.buttons$
+    this.sidebarStateService.configs$
       .pipe(takeUntil(this.unsubscribe$))
-      .subscribe((buttons: SidebarButton[]) => {
+      .subscribe((configs: SidebarButtonConfig[]) => {
 
-        if (buttons.some((button: SidebarButton) => button.active)) {
-          const {id} = buttons.find((button: SidebarButton) => button.active);
-          if (id === 0) {
-            this.selectedPortal = new ComponentPortal(PortalLayersComponent);
-          } else {
-            this.selectedPortal = new ComponentPortal(PortalDefaultComponent);
-          }
+        if (configs.some((conf: SidebarButtonConfig) => conf.active)) {
+
+          const config = configs.find((button: SidebarButtonConfig) => button.active);
+          this.selectedPortal = new ComponentPortal(config.viewerComponent,
+            null,
+            createInjector(this.injector, config));
 
         } else {
           if (this.selectedPortal && this.selectedPortal.isAttached) {
             this.selectedPortal.detach();
           }
+
         }
       });
   }

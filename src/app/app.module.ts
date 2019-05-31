@@ -16,6 +16,8 @@ import {SidebarPortalComponent} from './components/sidebar-portal/sidebar-portal
 import {PortalModule} from '@angular/cdk/portal';
 import {PortalLayersComponent} from './components/portal-layers/portal-layers.component';
 import {PortalDefaultComponent} from './components/portal-default/portal-default.component';
+import { PortalImportComponent } from './components/portal-import/portal-import.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,8 @@ import {PortalDefaultComponent} from './components/portal-default/portal-default
     SidebarButtonComponent,
     SidebarPortalComponent,
     PortalLayersComponent,
-    PortalDefaultComponent
+    PortalDefaultComponent,
+    PortalImportComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +37,9 @@ import {PortalDefaultComponent} from './components/portal-default/portal-default
     HttpClientModule,
     BrowserAnimationsModule,
     PortalModule,
-    MaterialModule
+    MaterialModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [
     OlService,
@@ -43,7 +48,8 @@ import {PortalDefaultComponent} from './components/portal-default/portal-default
   entryComponents: [
     SidebarPortalComponent,
     PortalLayersComponent,
-    PortalDefaultComponent
+    PortalImportComponent,
+    PortalDefaultComponent,
   ],
   bootstrap: [AppComponent]
 })

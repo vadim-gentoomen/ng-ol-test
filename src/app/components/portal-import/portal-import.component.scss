@@ -21,10 +21,28 @@
   }
 }
 
-.portal-current-layers {
+.import-wfs {
+  display: flex;
+  flex-direction: column;
 
-  &_item {
-    margin: 0 0 0 10px;
-    font: 14px Roboto, sans-serif;
+  .form-field {
+    width: 85%;
+    margin: 5px 0px -15px 10px;
   }
+
+  mat-error {
+    margin: 0 0 0 10px;
+    font-size: 12px;
+  }
+
+  .features-types-container {
+    position: relative;
+    //margin: 0px 0px 0px 0px;
+    height: 85%;
+    overflow: hidden;
+  }
+}
+
+.import-wfs > * {
+  width: 100%;
 }

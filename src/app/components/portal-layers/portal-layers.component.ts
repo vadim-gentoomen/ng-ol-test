@@ -1,7 +1,10 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
 import {WfsService} from '../../services/wfs.service';
 import {Subject} from 'rxjs';
-import {map, takeUntil} from 'rxjs/operators';
+import {PORTAL_DATA} from '../../model/portalData';
+import {SidebarButtonConfig} from '../../model/sidebarButtons';
+import {OlService} from '../../services/ol.service';
+import BaseLayer from 'ol/layer/Base';
 
 @Component({
   selector: 'app-portal-layers',
@@ -10,17 +13,23 @@ import {map, takeUntil} from 'rxjs/operators';
 })
 export class PortalLayersComponent implements OnInit, OnDestroy {
 
-  featureTypes$;
+  description: string;
+  layers: BaseLayer[] = [];
 
   private unsubscribe$ = new Subject<void>();
 
-  constructor(private wfsService: WfsService) {
-    // TODO: сделать нормально.
-    this.featureTypes$ = this.wfsService.getFeatureTypes$()
-      .pipe(
-        takeUntil(this.unsubscribe$),
-        map((ids: string[]) => ids.slice(0, 10))
-        );
+  constructor(@Inject(PORTAL_DATA) public data,
+              private wfsService: WfsService,
+              private olService: OlService) {
+
+    const {description = ''} = this.data as SidebarButtonConfig;
+    this.description = description;
+
+    this.layers = this.olService.getLayers().getArray();
+    this.layers.forEach(layer => {
+      console.log(layer.getProperties());
+    });
+
   }
 
   ngOnInit(): void {
@@ -29,6 +38,10 @@ export class PortalLayersComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
+  }
+
+  changeVisible($event, layer: BaseLayer): void {
+    layer.setVisible($event.checked);
   }
 
 }

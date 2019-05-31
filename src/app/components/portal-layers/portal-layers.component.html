@@ -1,8 +1,10 @@
-<p>
-  portal-layers works!
-</p>
-<div>
-  <ul>
-    <li *ngFor="let id of featureTypes$ | async">{{id}}</li>
-  </ul>
+<div class="portal-header">
+  <span>{{description}}</span>
+</div>
+
+<div class="portal-current-layers">
+  <div class="portal-current-layers_item" *ngFor="let layer of layers">
+    <mat-checkbox [checked]="layer.getVisible()"
+                  (change)="changeVisible($event, layer)">{{layer.getProperties()?.name}}</mat-checkbox>
+  </div>
 </div>

@@ -1,0 +1,26 @@
+<div class="portal-header">
+  <span>{{config.description}}</span>
+</div>
+
+<div class="import-wfs">
+  <form [formGroup]="geoServerForm">
+    <mat-form-field class="form-field">
+      <input matInput
+             placeholder="Геосервер с WFS"
+             formControlName="url"
+             (keyup.enter)="getFeatureTypes()">
+    </mat-form-field>
+    <button mat-icon-button color="accent" (click)="getFeatureTypes()">
+      <mat-icon>{{config.iconId}}</mat-icon>
+    </button>
+    <mat-error *ngIf="geoServerForm.invalid">Некорректно</mat-error>
+  </form>
+
+  <div class="features-types-container">
+    <ul>
+      <li *ngFor="let item of featureTypeNames"
+      (click)="selectType(item)">{{item}}</li>
+    </ul>
+  </div>
+
+</div>

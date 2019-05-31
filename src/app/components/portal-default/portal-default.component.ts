@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
+import {PORTAL_DATA} from '../../model/portalData';
+import {SidebarButtonConfig} from '../../model/sidebarButtons';
 
 @Component({
   selector: 'app-portal-default',
@@ -7,7 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PortalDefaultComponent implements OnInit {
 
-  constructor() { }
+  description: string;
+
+  constructor(@Inject(PORTAL_DATA) private data) {
+    const {description = ''} = this.data as SidebarButtonConfig;
+    this.description = description;
+  }
 
   ngOnInit() {
   }

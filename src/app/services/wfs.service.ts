@@ -1,17 +1,23 @@
 import {Injectable} from '@angular/core';
 import {Observable, Observer} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
-import {WFS} from 'ol/format';
+import {GeoJSON, WFS} from 'ol/format';
 import {environment} from '../../environments/environment';
 import {first, map, publish} from 'rxjs/operators';
 import {WriteGetFeatureOptions} from 'ol/format/WFS';
+import VectorSource from 'ol/source/Vector';
+import VectorLayer from 'ol/layer/Vector';
+import {Stroke, Style} from 'ol/style';
+import Feature from 'ol/Feature';
+import {OlService} from './ol.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WfsService {
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+              private olService: OlService) {
     // this.getFeatureTypes$()
     //   .subscribe(data => {
     //     console.log(data);
@@ -23,7 +29,7 @@ export class WfsService {
     //   });
   }
 
-  getFeatureTypes$(): Observable<string[]> {
+  getFeatureTypes$(url = environment.wfsUrl): Observable<string[]> {
     const obs = new Observable((observer: Observer<any>) => {
       const params = {
         service: 'WFS',
@@ -31,7 +37,7 @@ export class WfsService {
         request: 'DescribeFeatureType',
         outputFormat: 'application/json',
       };
-      this.http.get(environment.wfsUrl, {
+      this.http.get(url, {
         params,
         responseType: 'json',
       })
@@ -61,12 +67,12 @@ export class WfsService {
     return obs;
   }
 
-  featureRequest$(): Observable<any> {
+  featureRequest$(featureTypes: any[] = ['MARoadClimaticZoneSegment']): Observable<any> {
     const obs = new Observable((observer: Observer<any>) => {
       const featureOptions: WriteGetFeatureOptions = {
         featureNS: '',
         featurePrefix: '',
-        featureTypes: ['MARoadClimaticZoneSegment'],
+        featureTypes,
         srsName: environment.projection,
         outputFormat: 'application/json'
       };
@@ -79,11 +85,16 @@ export class WfsService {
         responseType: 'json'
       })
         .pipe(
-          first()
+          first(),
+          map((data: any) => {
+            const futures = new GeoJSON().readFeatures(data);
+            return futures;
+          }),
         )
         .subscribe({
-          next: (value) => {
-            observer.next(value);
+          next: (features: Feature[]) => {
+            observer.next(features);
+            this.olService.addFeatures(features);
           },
           complete: () => observer.complete(),
           error: (error) => {

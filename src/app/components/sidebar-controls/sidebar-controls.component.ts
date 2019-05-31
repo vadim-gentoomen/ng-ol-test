@@ -1,6 +1,6 @@
 import {Component, OnInit, QueryList, ViewChildren} from '@angular/core';
 import {SidebarButtonComponent} from '../sidebar-button/sidebar-button.component';
-import {SidebarButton} from '../model/model';
+import {SidebarButtonConfig} from '../../model/sidebarButtons';
 import {SidebarStateService} from '../../services/sidebar-state.service';
 
 @Component({
@@ -12,7 +12,7 @@ export class SidebarControlsComponent implements OnInit {
 
   @ViewChildren(SidebarButtonComponent) contentChildrenItems: QueryList<SidebarButtonComponent>;
 
-  buttons$ = this.sidebarStateService.buttons$;
+  config$ = this.sidebarStateService.configs$;
 
   constructor(private sidebarStateService: SidebarStateService) {
   }
@@ -20,8 +20,8 @@ export class SidebarControlsComponent implements OnInit {
   ngOnInit() {
   }
 
-  onClick(button: SidebarButton) {
-    this.sidebarStateService.changeState(button);
+  onClick(config: SidebarButtonConfig) {
+    this.sidebarStateService.changeState(config);
   }
 
 }

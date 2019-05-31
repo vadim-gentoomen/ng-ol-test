@@ -1,31 +1,22 @@
 import {NgModule} from '@angular/core';
 
 import {
-  MatAutocompleteModule,
   MatButtonModule,
-  MatCardModule,
-  MatDialogModule,
+  MatCheckboxModule,
+  MatFormFieldModule,
   MatIconModule,
-  MatListModule,
   MatInputModule,
-  MatDividerModule,
-  MatMenuModule,
+  MatPaginatorModule,
   MatProgressSpinnerModule,
-  MatProgressBarModule,
-  MatSlideToggleModule,
-  MatTooltipModule,
-  MatTabsModule,
-  MatSnackBarModule,
-  MatRadioModule, MatPaginatorModule
+  MatTooltipModule
 } from '@angular/material';
-// import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 
 /*Нужные модули Material Design добавлять сюда*/
 export const MATERIAL_MODULES = [
   // MatAutocompleteModule,
-  // MatButtonModule,
+  MatButtonModule,
   // MatMenuModule,
-  // MatIconModule,
+  MatIconModule,
   // MatListModule,
   // MatCardModule,
   // MatDividerModule,
@@ -34,12 +25,13 @@ export const MATERIAL_MODULES = [
   MatProgressSpinnerModule,
   // MatProgressBarModule,
   // MatDialogModule,
-  // MatInputModule,
+  MatInputModule,
   // MatTabsModule,
   // MatSnackBarModule,
   // MatRadioModule,
-  MatPaginatorModule,
-  // NoopAnimationsModule,
+  MatFormFieldModule,
+  // MatPaginatorModule,
+  MatCheckboxModule,
 ];
 
 @NgModule({

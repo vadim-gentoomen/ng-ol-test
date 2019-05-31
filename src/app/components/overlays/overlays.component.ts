@@ -24,14 +24,14 @@ export class OverlaysComponent implements OnInit {
       element: this.build.nativeElement,
       positioning: OverlayPositioning.CENTER_CENTER
     });
-    this.ols.map.addOverlay(build);
+    // this.ols.map.addOverlay(build);
 
     const work = new Overlay({
       position: fromLonLat([34.099185, 44.937494]),
       element: this.work.nativeElement,
       positioning: OverlayPositioning.CENTER_CENTER
     });
-    this.ols.map.addOverlay(work);
+    // this.ols.map.addOverlay(work);
   }
 
 }
