@@ -94,7 +94,8 @@ export class WfsService {
         .subscribe({
           next: (features: Feature[]) => {
             observer.next(features);
-            this.olService.addFeatures(features);
+            this.olService.clearDraft();
+            this.olService.drawFeatures(features);
           },
           complete: () => observer.complete(),
           error: (error) => {

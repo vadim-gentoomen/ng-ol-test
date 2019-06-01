@@ -12,13 +12,15 @@ import VectorLayer from 'ol/layer/Vector';
 import {Stroke, Style} from 'ol/style';
 import Feature from 'ol/Feature';
 import LayerType from 'ol/LayerType';
-import {createXYZ} from 'ol/tilegrid';
+import Fill from "ol/style/Fill";
 
 @Injectable({
   providedIn: 'root'
 })
 export class OlService {
   map: Map;
+
+  private draftSource: VectorSource;
 
   constructor() {
   }
@@ -65,16 +67,16 @@ export class OlService {
     /**
      * YandexMap со сдвигом, не работает.
      */
-    // const yandex = new Tile({
-    //   source: new XYZ({
-    //     url: 'http://vec0{1-4}.maps.yandex.net/tiles?l=map&x={x}&y={y}&z={z}',
-    //     projection: 'EPSG:3395',
-    //     tileGrid: createXYZ({
-    //       extent: [-20037508.342789244, -20037508.342789244, 20037508.342789244, 20037508.342789244]
-    //     })
-    //   })
-    // });
-    // yandex.setProperties({name: 'YandexMap'});
+      // const yandex = new Tile({
+      //   source: new XYZ({
+      //     url: 'http://vec0{1-4}.maps.yandex.net/tiles?l=map&x={x}&y={y}&z={z}',
+      //     projection: 'EPSG:3395',
+      //     tileGrid: createXYZ({
+      //       extent: [-20037508.342789244, -20037508.342789244, 20037508.342789244, 20037508.342789244]
+      //     })
+      //   })
+      // });
+      // yandex.setProperties({name: 'YandexMap'});
 
     const vectorSource = new VectorSource();
     const vector = new VectorLayer({
@@ -88,12 +90,37 @@ export class OlService {
     });
     vector.setProperties({name: 'VectorLayer'});
 
+    this.draftSource = new VectorSource({
+      features: [],
+    });
+
     this.map = new Map({
       target: element,
-      layers: [osm, cycleMap, vector, watercolor, terrain, toner],
+      layers: [
+        new VectorLayer({
+          source: this.draftSource,
+          zIndex: 10000,
+          style: new Style({
+            fill: new Fill({
+              color: 'rgba(255, 255, 255, 0.3)'
+            }),
+            stroke: new Stroke({
+              color: '#ff0018',
+              width: 2
+            })
+          })
+        }),
+        osm,
+        cycleMap,
+        vector,
+        watercolor,
+        terrain,
+        toner,
+      ],
       view: new View({
         // center: fromLonLat([84.958757, 56.513178]), // Томск
-        center: fromLonLat([34.0, 45.0]), // Крым
+        projection: 'EPSG:4326',
+        center: [34, 45],
         zoom: 8.5
       }),
       controls: defaults()
@@ -122,4 +149,19 @@ export class OlService {
     // const extent: Extent  = vectorSource.getExtent();
     // this.map.getView().fit(extent);
   }
+
+  drawFeatures(features: Feature[]): void {
+    this.draftSource.addFeatures(features);
+
+    if (features[0] && features[0].getGeometry()) {
+      this.map.getView().fit(features[0].getGeometry().getExtent());
+    } else {
+      console.log('NO GEOMETRY ???', features[0]);
+    }
+  }
+
+  clearDraft() {
+    this.draftSource.clear();
+  }
+
 }
