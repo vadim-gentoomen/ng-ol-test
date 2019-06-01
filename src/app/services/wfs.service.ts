@@ -5,9 +5,6 @@ import {GeoJSON, WFS} from 'ol/format';
 import {environment} from '../../environments/environment';
 import {first, map, publish} from 'rxjs/operators';
 import {WriteGetFeatureOptions} from 'ol/format/WFS';
-import VectorSource from 'ol/source/Vector';
-import VectorLayer from 'ol/layer/Vector';
-import {Stroke, Style} from 'ol/style';
 import Feature from 'ol/Feature';
 import {OlService} from './ol.service';
 

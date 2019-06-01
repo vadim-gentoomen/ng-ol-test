@@ -1,4 +1,4 @@
-import {Component, ComponentFactoryResolver, Injector, OnDestroy, OnInit, ViewContainerRef} from '@angular/core';
+import {Component, Injector, OnDestroy, OnInit, ViewContainerRef} from '@angular/core';
 import {ComponentPortal, Portal} from '@angular/cdk/portal';
 import {SidebarStateService} from '../../services/sidebar-state.service';
 import {SidebarButtonConfig} from '../../model/sidebarButtons';
