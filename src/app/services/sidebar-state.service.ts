@@ -28,7 +28,7 @@ export class SidebarStateService {
       .subscribe(this.sbConfigs$);
   }
 
-  changeState(config: SidebarButtonConfig): void {
+  toggleState(config: SidebarButtonConfig): void {
     const updateFunction: UpdateOperation = (oldConfigs: SidebarButtonConfig[]) => {
       const configs = _.clone(oldConfigs);
       _.each(configs, (item: SidebarButtonConfig) => {
@@ -43,6 +43,19 @@ export class SidebarStateService {
 
     this.buttonsUpdateOperation$.next(updateFunction);
   }
+
+  closeAll(): void {
+    const updateFunction: UpdateOperation = (oldConfigs: SidebarButtonConfig[]) => {
+      const configs = _.clone(oldConfigs);
+      _.each(configs, (item: SidebarButtonConfig) => {
+        item.active = false; // Все кнопки не активны.
+      });
+      return configs;
+    };
+
+    this.buttonsUpdateOperation$.next(updateFunction);
+  }
+
 }
 
 const sbConfigs: SidebarButtonConfig[] = [

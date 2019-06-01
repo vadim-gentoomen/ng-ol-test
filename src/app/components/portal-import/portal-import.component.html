@@ -1,5 +1,13 @@
-<div class="portal-header">
-  <span>{{config.description}}</span>
+<div class="portal-head">
+  <div class="portal-head_header">
+    <div class="portal-head_header_title">{{config.description}}</div>
+    <button class="close-button"
+            matTooltip="Закрыть"
+            [matTooltipPosition]="'after'"
+            (click)="config.close()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
 </div>
 
 <div class="import-wfs">

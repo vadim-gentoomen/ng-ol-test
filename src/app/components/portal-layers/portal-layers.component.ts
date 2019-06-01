@@ -13,7 +13,7 @@ import BaseLayer from 'ol/layer/Base';
 })
 export class PortalLayersComponent implements OnInit, OnDestroy {
 
-  description: string;
+  config: SidebarButtonConfig;
   layers: BaseLayer[] = [];
 
   private unsubscribe$ = new Subject<void>();
@@ -22,12 +22,11 @@ export class PortalLayersComponent implements OnInit, OnDestroy {
               private wfsService: WfsService,
               private olService: OlService) {
 
-    const {description = ''} = this.data as SidebarButtonConfig;
-    this.description = description;
-
+    this.config = this.data as SidebarButtonConfig;
     this.layers = this.olService.getLayers().getArray();
+
     this.layers.forEach(layer => {
-      console.log(layer.getProperties());
+      // console.log(layer.getProperties());
     });
 
   }

@@ -28,13 +28,13 @@ export class PortalImportComponent implements OnInit, OnDestroy {
               private olService: OlService) {
 
     this.config = this.data as SidebarButtonConfig;
-
     this.geoServerForm = this.form.group({
       url: [environment.wfsUrl, Validators.compose([
         Validators.required,
         Validators.minLength(1),
       ])],
     });
+
   }
 
   ngOnInit(): void {

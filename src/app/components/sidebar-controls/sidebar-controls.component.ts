@@ -21,7 +21,7 @@ export class SidebarControlsComponent implements OnInit {
   }
 
   onClick(config: SidebarButtonConfig) {
-    this.sidebarStateService.changeState(config);
+    this.sidebarStateService.toggleState(config);
   }
 
 }

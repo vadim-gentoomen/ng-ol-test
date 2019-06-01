@@ -19,8 +19,7 @@ export class SidebarPortalComponent implements OnInit, OnDestroy {
 
   constructor(private viewContainerRef: ViewContainerRef,
               private sidebarStateService: SidebarStateService,
-              private injector: Injector,
-              private componentFactoryResolver: ComponentFactoryResolver) {
+              private injector: Injector) {
   }
 
   ngOnInit(): void {
@@ -31,6 +30,9 @@ export class SidebarPortalComponent implements OnInit, OnDestroy {
         if (configs.some((conf: SidebarButtonConfig) => conf.active)) {
 
           const config = configs.find((button: SidebarButtonConfig) => button.active);
+          config.close = () => {
+            this.sidebarStateService.closeAll();
+          };
           this.selectedPortal = new ComponentPortal(config.viewerComponent,
             null,
             createInjector(this.injector, config));

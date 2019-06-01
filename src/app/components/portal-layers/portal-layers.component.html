@@ -1,6 +1,15 @@
-<div class="portal-header">
-  <span>{{description}}</span>
+<div class="portal-head">
+  <div class="portal-head_header">
+    <div class="portal-head_header_title">{{config.description}}</div>
+    <button class="close-button"
+            matTooltip="Закрыть"
+            [matTooltipPosition]="'after'"
+            (click)="config.close()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
 </div>
+
 
 <div class="portal-current-layers">
   <div class="portal-current-layers_item" *ngFor="let layer of layers">

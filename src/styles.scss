@@ -10,7 +10,30 @@
   left: 45%;
   right: unset !important;
   bottom: 8px;
+}
 
+.portal-head {
+  position: relative;
+  cursor: default;
+  margin: 0px 5px 0px 5px;
+  border-bottom: 1px solid darkcyan;
+
+  &_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-transform: uppercase;
+    font-size: 16px;
+
+    .close-button {
+      cursor: pointer;
+      background-color: transparent;
+      width: 28px;
+      height: 24px;
+      outline: none;
+      border: none;
+    }
+  }
 }
 
 html, body { height: 100%; }

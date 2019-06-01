@@ -11,4 +11,5 @@ export interface SidebarButtonConfig {
   disabled: boolean;
   description: string;
   viewerComponent: Type<any>;
+  close?: () => void;
 }

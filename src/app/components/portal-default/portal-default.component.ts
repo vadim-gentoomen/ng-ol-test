@@ -9,11 +9,12 @@ import {SidebarButtonConfig} from '../../model/sidebarButtons';
 })
 export class PortalDefaultComponent implements OnInit {
 
-  description: string;
+  config: SidebarButtonConfig;
 
   constructor(@Inject(PORTAL_DATA) private data) {
-    const {description = ''} = this.data as SidebarButtonConfig;
-    this.description = description;
+
+    this.config = this.data as SidebarButtonConfig;
+
   }
 
   ngOnInit() {
