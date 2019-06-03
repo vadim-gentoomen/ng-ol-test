@@ -30,12 +30,12 @@ export class SidebarPortalComponent implements OnInit, OnDestroy {
         if (configs.some((conf: SidebarButtonConfig) => conf.active)) {
 
           const config = configs.find((button: SidebarButtonConfig) => button.active);
+
           config.close = () => {
             this.sidebarStateService.closeAll();
           };
-          this.selectedPortal = new ComponentPortal(config.viewerComponent,
-            null,
-            createInjector(this.injector, config));
+
+          this.selectedPortal = new ComponentPortal(config.viewerComponent, null, createInjector(this.injector, config));
 
         } else {
           if (this.selectedPortal && this.selectedPortal.isAttached) {

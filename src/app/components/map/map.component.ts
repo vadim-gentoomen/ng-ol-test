@@ -7,7 +7,7 @@ import {OlService} from '../../services/ol.service';
   styleUrls: ['./map.component.scss']
 })
 export class MapComponent implements OnInit {
-  @ViewChild('map') mapElement: ElementRef;
+  @ViewChild('map', { static: true }) mapElement: ElementRef;
 
   constructor(private ols: OlService) {
   }

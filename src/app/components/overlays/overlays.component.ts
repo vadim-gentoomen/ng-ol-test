@@ -10,8 +10,8 @@ import OverlayPositioning from 'ol/OverlayPositioning';
   styleUrls: ['./overlays.component.scss']
 })
 export class OverlaysComponent implements OnInit {
-  @ViewChild('build') build: ElementRef;
-  @ViewChild('work') work: ElementRef;
+  @ViewChild('build', { static: true }) build: ElementRef;
+  @ViewChild('work', { static: true }) work: ElementRef;
 
   constructor(private ols: OlService) {
 
